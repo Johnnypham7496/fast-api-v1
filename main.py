@@ -15,3 +15,9 @@ async def welcome(response: Response):
 #   when a user hits this endpoint, the status_response should be a 200 and will return a message for the user
 #   response parameter inside the function is for HTTP status codes
     return {"message": "Hello, welcome to Autobots FastAPI bootcamp"}
+
+
+@app.get("/health", tags=['health'], response_description='Retrieves health status of this application')
+async def health(response: Response):
+    response.status_code = status.HTTP_200_OK
+    return {"status": "OK"}
