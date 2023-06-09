@@ -69,3 +69,11 @@ nullable meaning this field is required
 <img src="images/users_table.png" alt="health_test" height="200" width="">
 <hr>
 
+## Created schema.py
+this is for when someone is entering data, the data will be bumped against the schema to make sure all fields are present before interacting with the database
+
+orm stands for object realational mapping
+
+<img src="images/user_model.png" alt="user_model" height="250" width="">
+<hr>
+
