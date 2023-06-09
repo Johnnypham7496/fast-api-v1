@@ -14,6 +14,16 @@ rewriting enterprise level fast-api
 
     - pip freeze > requirements.txt
 
+- Pytest
+
+    - pip install pytest
+
+    - pip install httpx
+
+- Sqlalchemy
+
+    pip install sqlalchemy
+
 ## Initial commit 
 is to have the venv installed and updated readme
 <hr>
@@ -44,5 +54,8 @@ testing welcome path op
 <img src="images/health.png" alt="health" height="200" width="900">
 
 <img src="images/health_test.png" alt="health_test" height="200" width="">
+<hr>
+
+## Installed sqlalchemy dependency and created a db_config file for database connection
 <hr>
 
