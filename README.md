@@ -83,3 +83,10 @@ this will also have a test data function for testing
 
 <img src="images/user_repository.png" alt="user_repository" height="300" width="">
 <hr>
+
+## Created a create_db function
+this function is for creating our db file in db/local_sqlite
+
+this will drop_all data at first then create the data and add the test data
+
+<img src="images/create_db.png" alt="create_db" height="200" width="700">
