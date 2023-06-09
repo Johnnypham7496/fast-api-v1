@@ -59,3 +59,13 @@ testing welcome path op
 ## Installed sqlalchemy dependency and created a db_config file for database connection
 <hr>
 
+## Creating users data table 
+id column is generated after the other 2 fields are entered
+primary key makes it easier for us to find the user
+string(#) will alow how many characters are entered
+unique ensuring there is one 1 particular value in the database
+nullable meaning this field is required 
+
+<img src="images/users_table.png" alt="health_test" height="200" width="">
+<hr>
+
