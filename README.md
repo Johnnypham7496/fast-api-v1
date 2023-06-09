@@ -77,3 +77,9 @@ orm stands for object realational mapping
 <img src="images/user_model.png" alt="user_model" height="250" width="">
 <hr>
 
+## Created user_repository.py file
+this file will have the functions we need to interact with the database
+this will also have a test data function for testing
+
+<img src="images/user_repository.png" alt="user_repository" height="300" width="">
+<hr>
