@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from router import app_router
+from router import app_router, users_router
 
 # creating app variable for path operations
 app = FastAPI(
@@ -10,6 +10,7 @@ app = FastAPI(
 
 
 app.include_router(app_router.router)
+app.include_router(users_router.router)
 
 
 # @app.get("/dbsetup")
