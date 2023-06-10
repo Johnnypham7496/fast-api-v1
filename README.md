@@ -90,3 +90,7 @@ this function is for creating our db file in db/local_sqlite
 this will drop_all data at first then create the data and add the test data
 
 <img src="images/create_db.png" alt="create_db" height="200" width="700">
+<hr>
+
+## Moved welcome and health endpoint to app_router.py located in the router folder
+<hr>
