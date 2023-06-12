@@ -10,12 +10,14 @@ client = TestClient(app)
 
 
 def test_tc0001_welcome():
+    td_message = {"message": "Hello, welcome to Autobots FastAPI bootcamp"}
     response = client.get("/")
     assert response.status_code == 200
-    assert response.json() == {"message": "Hello, welcome to Autobots FastAPI bootcamp"}
+    assert response.json() == td_message
 
 
 def test_tc0002_health():
+    td_message = {"status": "OK"}
     response = client.get("/health")
     assert response.status_code == 200
-    assert response.json() == {"status": "OK"}
+    assert response.json() == td_message
