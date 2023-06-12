@@ -1,14 +1,18 @@
-import pytest
 import sys
 import os
+import pytest
 from typing import Any
 from typing import Generator
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from db_config import get_db
 from router.users_router import router
+from db_config import get_db
+from db.user_db import Base
+
+
+
 
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))) 
@@ -22,8 +26,7 @@ def start_application():
     return app
 
 
-SQLALCHEMY_DATABASE_URL = "sqlite:///./db/local_sqlite/database.db"
-
+SQLALCHEMY_DATABASE_URL = "sqlite:///./db/local_sqlite/test.db"
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}
 )
@@ -34,11 +37,12 @@ SessionTesting = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 @pytest.fixture(scope="function")
 def app() -> Generator[FastAPI, Any, None]:
     """
-    Create an app instance
+    Create a fresh database on each test case.
     """
+    # Base.metadata.create_all(engine)  # Create the tables.
     _app = start_application()
     yield _app
-
+    # Base.metadata.drop_all(engine)
 
 
 @pytest.fixture(scope="function")
@@ -71,20 +75,21 @@ def client(
     with TestClient(app) as client:
         yield client
 
-    
+
 def test_tc0001_get_all_users(client):
     td_first_record = 0
+    td_role = "villain"
     td_id = 1
-    td_username = 'darth.vader'
-    td_email = 'darth.vader@gmail.com'
-    td_role = 'villain'
+    td_username = "darth.vader"
+    td_email = "darth.vader@gmail.com"
     td_expected_record_count = 3
 
     response = client.get('/users/v1')
 
     assert response.status_code == 200
-    assert response.json()[td_first_record]["id"] == td_id
-    assert response.json()[td_first_record]["username"] == td_username
-    assert response.json()[td_first_record]["email"] == td_email
-    assert response.json()[td_first_record]["role"] == td_role
+
+    assert response.json()[td_first_record]['id'] == td_id
+    assert response.json()[td_first_record]['username'] == td_username
+    assert response.json()[td_first_record]['email'] == td_email
+    assert response.json()[td_first_record]['role'] == td_role
     assert len(response.json()) == td_expected_record_count
