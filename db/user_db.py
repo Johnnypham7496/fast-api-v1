@@ -2,7 +2,7 @@ from sqlalchemy import String, Integer, Column
 from db_config import Base 
 
 # creating a users table with 4 columns
-class Userdb(Base):
+class UserDb(Base):
     __tablename__ = 'users'
 
     id = Column(Integer, primary_key= True, index= True)

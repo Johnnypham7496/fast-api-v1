@@ -90,3 +90,13 @@ this function is for creating our db file in db/local_sqlite
 this will drop_all data at first then create the data and add the test data
 
 <img src="images/create_db.png" alt="create_db" height="200" width="700">
+<hr>
+
+## Moved welcome and health endpoint to app_router.py located in the router folder
+<hr>
+
+## Created get_all_users function in user_repository.py
+this code allows us to retrieve all the users in the database
+also added a function in the users_router.py for users to access
+
+<img src="images/get_all_users.png" alt="get_all_users" height="150" width="400">
