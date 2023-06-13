@@ -107,3 +107,11 @@ this test is will be testing the first data in our test.db making sure all the v
 
 <img src="images/test_get_all_users.png" alt="test_get_all_users" height="350" width="500">
 <hr>
+
+
+## Created get_by_username function in user_repository.py and get_by_username path operation in users_router
+these codes will allow us to get information from a single user by their username 
+
+<img src="images/get_by_username.png" alt="test_get_all_users" height="250" width="1000">
+<img src="images/get_by_username_repository.png" alt="test_get_all_users" height="200" width="500">
+<hr>

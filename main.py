@@ -1,10 +1,11 @@
+import uvicorn 
 from fastapi import FastAPI, Response, Depends
 from router import app_router, users_router
 from db import user_db
 from db_config import engine, get_db
 from repository import users_repository
 from sqlalchemy.orm import Session
-import uvicorn 
+
 
 # creating app variable for path operations
 app = FastAPI(

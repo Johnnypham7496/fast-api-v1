@@ -16,3 +16,10 @@ def get_users(resposne: Response, db: Session = Depends(get_db)):
     return_value = users_repository.get_all_users(db)
     resposne.status_code = status.HTTP_200_OK
     return return_value
+
+
+@router.get("/{username}", response_description="Display user by username", description="Retrieves user by username", response_model=UserModel)
+def get_by_username(response: Response, username: str, db: Session = Depends(get_db) ):
+    return_value = users_repository.get_by_username(db, username)
+    response.status_code = status.HTTP_200_OK
+    return return_value
