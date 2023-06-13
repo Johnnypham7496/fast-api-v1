@@ -100,3 +100,10 @@ this code allows us to retrieve all the users in the database
 also added a function in the users_router.py for users to access
 
 <img src="images/get_all_users.png" alt="get_all_users" height="150" width="400">
+<hr>
+
+# Created get_all_users test in users_test.py
+this test is will be testing the first data in our test.db making sure all the values are present
+
+<img src="images/test_get_all_users.png" alt="test_get_all_users" height="350" width="500">
+<hr>
