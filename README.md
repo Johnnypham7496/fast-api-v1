@@ -115,3 +115,6 @@ these codes will allow us to get information from a single user by their usernam
 <img src="images/get_by_username.png" alt="test_get_all_users" height="250" width="1000">
 <img src="images/get_by_username_repository.png" alt="test_get_all_users" height="200" width="500">
 <hr>
+
+## Created get_by_username test in users_test.py file testing the 200 and 404 response codes and return messages
+<hr>
