@@ -49,6 +49,6 @@ def add_user(request: CreateUserModel, response: Response, db: Session = Depends
         raise HTTPException(status_code= status.HTTP_400_BAD_REQUEST, detail=response_text)
     
 
-    response.status_code = status.HTTP_200_OK
-    response.headers['Location'] = 'users/v1/' + str(username_request.strip())
+    response.status_code = status.HTTP_201_CREATED
+    response.headers['Location'] = '/users/v1/' + str(username_request.strip())
     return users_repository.add_user(db, username_request.strip(), email_request.strip(), role_request.strip())

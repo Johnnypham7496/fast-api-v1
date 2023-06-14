@@ -121,3 +121,7 @@ these codes will allow us to get information from a single user by their usernam
 
 ## 17. Created add_user function in users_router.py file and created a CreateUserModel in schemas.py prompting the user to enter in the required fields before creating user to the database
 <hr>
+
+## 18. Created add_user function to users_test.py file
+this test will test our post operation in users_router.py and will also preform a get call to check the user information that is created in test.db file
+<hr>
