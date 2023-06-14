@@ -37,15 +37,15 @@ def add_user(request: CreateUserModel, response: Response, db: Session = Depends
     role_request = request.role
 
     if username_request.strip() == "":
-        response_text = "username cannot be empty. Please check your payload and try again"
+        response_text = "username field cannot be empty. Please check your payload and try again"
         raise HTTPException(status_code= status.HTTP_400_BAD_REQUEST, detail=response_text)
     
     if email_request.strip() == "":
-        response_text = "email cannot be empty. Please check your payload and try again"
+        response_text = "email field cannot be empty. Please check your payload and try again"
         raise HTTPException(status_code= status.HTTP_400_BAD_REQUEST, detail=response_text)
     
     if role_request.strip() == "":
-        response_text = "role cannot be empty. Please check your payload and try again"
+        response_text = "role field cannot be empty. Please check your payload and try again"
         raise HTTPException(status_code= status.HTTP_400_BAD_REQUEST, detail=response_text)
     
 

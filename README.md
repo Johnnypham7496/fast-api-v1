@@ -125,3 +125,7 @@ these codes will allow us to get information from a single user by their usernam
 ## 18. Created add_user function to users_test.py file
 this test will test our post operation in users_router.py and will also preform a get call to check the user information that is created in test.db file
 <hr>
+
+## 19. Created different scenario tests for add_user function in users_router.py
+testing different fields to make sure a status_code of 400 is responded to user when not entering all fields for post request
+<hr>
