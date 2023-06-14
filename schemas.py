@@ -16,7 +16,7 @@ class MessageModel(BaseModel):
     detail: str
 
 
-class CreateUser(BaseModel):
+class CreateUserModel(BaseModel):
     username: str
     email: str
     role: str
