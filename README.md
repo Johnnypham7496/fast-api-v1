@@ -134,3 +134,11 @@ testing different fields to make sure a status_code of 400 is responded to user 
 this code will udpate the fields if values are given by the user. We do not want the user to be able to update the username but email and role fields can be updated 
 
 <img src= "images/update_user.png" alt="update_user" height="250" width="600">
+<hr>
+
+
+## Created update_user function in users_router.py file
+this function check if there is a value in the email and role fields, then check to for the username within our database, will check there are values entered by the user in both email and role otherwise the fields will not be updated, also checks if both fields are empty
+
+If email or role values are added or both, this will give a 204 status_code and will commit these changes in our database
+<hr>
