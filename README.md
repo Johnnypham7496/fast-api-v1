@@ -133,4 +133,4 @@ testing different fields to make sure a status_code of 400 is responded to user 
 ## 20. Added update_user function to users_repository.py
 this code will udpate the fields if values are given by the user. We do not want the user to be able to update the username but email and role fields can be updated 
 
-<img src= "">
+<img src= "images/update_user.png" alt="update_user" height="250" width="600">

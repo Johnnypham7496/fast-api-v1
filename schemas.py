@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Optional
 
 
 class UserModel(BaseModel):
@@ -20,3 +20,8 @@ class CreateUserModel(BaseModel):
     username: str
     email: str
     role: str
+
+
+class UpdateUser(BaseModel):
+    email: Optional[str]
+    role: Optional[str]
