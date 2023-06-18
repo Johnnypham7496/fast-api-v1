@@ -23,6 +23,6 @@ class CreateUserModel(BaseModel):
     role: str
 
 
-class UpdateUser(BaseModel):
+class UpdateUserModel(BaseModel):
     email: Optional[str]
     role: Optional[str]

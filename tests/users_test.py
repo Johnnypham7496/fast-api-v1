@@ -184,24 +184,8 @@ def test_tc006_post_empty_email(client):
     assert response.json()['detail'] == td_message
 
 
-def test_tc006_post_empty_email(client):
-    td_username = 'superman'
-    td_email = ''
-    td_role = ''
-    td_message = 'email field cannot be empty. Please check your payload and try again'
 
-
-    response = client.post("/users/v1", data=json.dumps(dict(
-        username= td_username,
-        email= td_email,
-        role = td_role
-    )), content='application/json')
-
-    assert response.status_code == 400
-    assert response.json()['detail'] == td_message
-
-
-def test_tc006_post_empty_email(client):
+def test_tc007_post_empty_role(client):
     td_username = 'superman'
     td_email = 'clark.kent@gmail.com'
     td_role = ''
@@ -216,3 +200,63 @@ def test_tc006_post_empty_email(client):
 
     assert response.status_code == 400
     assert response.json()['detail'] == td_message
+
+
+def test_tc0008_put(client):
+    td_id = 1
+    td_username = 'darth.vader'
+    td_email =  'test@gmail.com'
+    td_role = 'test_role'
+    td_payload = '{"email": "test@gmail.com", "role": "test_role"}'
+
+
+    response = client.put('/users/v1/' + td_username, data= td_payload, content= 'application/json')
+
+    assert response.status_code == 204
+
+    get_response = client.get(f'/users/v1/{td_username}')
+
+    assert get_response.json()['id'] == td_id
+    assert get_response.json()['username'] == td_username
+    assert get_response.json()['email'] == td_email
+    assert get_response.json()['role'] == td_role
+
+
+def test_tc0009_put_update_email(client):
+    td_id = 2
+    td_username = 'bruce.wayne'
+    td_email =  'robin@gmail.com'
+    td_role = 'hero'
+    td_payload = '{"email": "robin@gmail.com"}'
+
+
+    response = client.put('/users/v1/' + td_username, data= td_payload, content= 'application/json')
+
+    assert response.status_code == 204
+
+    get_response = client.get(f'/users/v1/{td_username}')
+
+    assert get_response.json()['id'] == td_id
+    assert get_response.json()['username'] == td_username
+    assert get_response.json()['email'] == td_email
+    assert get_response.json()['role'] == td_role
+
+
+def test_tc0010_put_update_role(client):
+    td_id = 3
+    td_username = 'captain.america'
+    td_email =  'captain.america@gmail.com'
+    td_role = 'villain'
+    td_payload = '{"role": "villain"}'
+
+
+    response = client.put('/users/v1/' + td_username, data= td_payload, content= 'application/json')
+
+    assert response.status_code == 204
+
+    get_response = client.get(f'/users/v1/{td_username}')
+
+    assert get_response.json()['id'] == td_id
+    assert get_response.json()['username'] == td_username
+    assert get_response.json()['email'] == td_email
+    assert get_response.json()['role'] == td_role

@@ -142,3 +142,7 @@ this function check if there is a value in the email and role fields, then check
 
 If email or role values are added or both, this will give a 204 status_code and will commit these changes in our database
 <hr>
+
+## Added put user test in users_test.py
+testing different areas for put request such as updating both fields or email and role and testing if put request works if we only have 1 field being changed
+<hr>

@@ -2,7 +2,7 @@ from fastapi import Response, Depends, APIRouter, status, HTTPException
 from repository import users_repository
 from db_config import get_db
 from sqlalchemy.orm import Session
-from schemas import UserModel, MessageModel, CreateUserModel
+from schemas import UserModel, MessageModel, CreateUserModel, UpdateUserModel
 from typing import List
 
 router = APIRouter(
@@ -54,8 +54,8 @@ def add_user(request: CreateUserModel, response: Response, db: Session = Depends
     return users_repository.add_user(db, username_request.strip(), email_request.strip(), role_request.strip())
 
 
-@router.post('/{username}', response_description='Successfully updated user info', description='Update a single user record', status_code=204, responses={204: {"message": None}, 400: {"message": MessageModel}, 404: {"message": MessageModel}})
-def update_user(username: str, request: UserModel, response: Response, db: Session = Depends(get_db)):
+@router.put('/{username}', response_description='Successfully updated user info', description='Update a single user record', status_code=204, responses={204: {"message": None}, 400: {"message": MessageModel}, 404: {"message": MessageModel}})
+def update_user(username: str, request: UpdateUserModel, response: Response, db: Session = Depends(get_db)):
     email_request = request.email
     role_request = request.role
 
@@ -69,10 +69,12 @@ def update_user(username: str, request: UserModel, response: Response, db: Sessi
         response_text = 'username not found. Please use Post to create a user record'
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=response_text)
     
-    if email_request != "":
+
+    if email_request != None:
         email_request = email_request.strip()
     else: 
         email_request = ""
+
 
     if role_request != None:
         role_request = role_request.strip()
