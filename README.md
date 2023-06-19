@@ -129,3 +129,22 @@ this test will test our post operation in users_router.py and will also preform 
 ## 19. Created different scenario tests for add_user function in users_router.py
 testing different fields to make sure a status_code of 400 is responded to user when not entering all fields for post request
 <hr>
+
+## 20. Added update_user function to users_repository.py
+this code will udpate the fields if values are given by the user. We do not want the user to be able to update the username but email and role fields can be updated 
+
+<img src= "images/update_user.png" alt="update_user" height="250" width="600">
+<hr>
+
+
+## Created update_user function in users_router.py file
+this function check if there is a value in the email and role fields, then check to for the username within our database, will check there are values entered by the user in both email and role otherwise the fields will not be updated, also checks if both fields are empty
+
+If email or role values are added or both, this will give a 204 status_code and will commit these changes in our database
+<hr>
+
+## Added put user test in users_test.py
+testing different areas for put request such as updating both fields or email and role and testing if put request works if we only have 1 field being changed
+
+added more put test by testing the bad scenarios if they body is empty, username not found, and if there is no body in the request
+<hr>
