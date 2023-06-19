@@ -54,7 +54,7 @@ def add_user(request: CreateUserModel, response: Response, db: Session = Depends
     return users_repository.add_user(db, username_request.strip(), email_request.strip(), role_request.strip())
 
 
-@router.put('/{username}', response_description='Successfully updated user info', description='Update a single user record', status_code=204, responses={204: {"message": None}, 400: {"message": MessageModel}, 404: {"message": MessageModel}})
+@router.put("/{username}", response_description='Successfully updated user info', description='Update a single user record', status_code=204, responses={204: {"model": None}, 400: {"model": MessageModel}, 404: {"model": MessageModel}})
 def update_user(username: str, request: UpdateUserModel, response: Response, db: Session = Depends(get_db)):
     email_request = request.email
     role_request = request.role
@@ -83,7 +83,7 @@ def update_user(username: str, request: UpdateUserModel, response: Response, db:
 
     
     if email_request == "" and role_request == "":
-        response_text = 'request body fields cannot be empty. Please check you payload and try again'
+        response_text = 'request body fields cannot be empty. Please check your payload and try again'
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=response_text)
     
     response.status_code= status.HTTP_204_NO_CONTENT

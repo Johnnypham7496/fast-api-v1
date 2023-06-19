@@ -145,4 +145,6 @@ If email or role values are added or both, this will give a 204 status_code and 
 
 ## Added put user test in users_test.py
 testing different areas for put request such as updating both fields or email and role and testing if put request works if we only have 1 field being changed
+
+added more put test by testing the bad scenarios if they body is empty, username not found, and if there is no body in the request
 <hr>
