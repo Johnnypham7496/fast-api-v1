@@ -148,3 +148,9 @@ testing different areas for put request such as updating both fields or email an
 
 added more put test by testing the bad scenarios if they body is empty, username not found, and if there is no body in the request
 <hr>
+
+## Added delete user function in users_repository.py and users_router.py 
+our functino in users_router.py will also include an if statement to check for the user in our database. If user is not found then we will raise a HTTPException of 404
+
+Also added response headers in all of our user functions in users_router.py
+<hr>
