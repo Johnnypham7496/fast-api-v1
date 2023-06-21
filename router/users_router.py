@@ -38,6 +38,12 @@ def add_user(request: CreateUserModel, response: Response, db: Session = Depends
     email_request = request.email
     role_request = request.role
 
+    existing_username = users_repository.get_by_username(db, username_request)
+
+    if existing_username:
+        response_text = 'username already exists. Please check your payload and try again'
+        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail= response_text)
+
     if username_request.strip() == "":
         response_text = "username field cannot be empty. Please check your payload and try again"
         raise HTTPException(status_code= status.HTTP_400_BAD_REQUEST, detail=response_text)

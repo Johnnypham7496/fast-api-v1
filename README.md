@@ -137,20 +137,24 @@ this code will udpate the fields if values are given by the user. We do not want
 <hr>
 
 
-## Created update_user function in users_router.py file
+## 21. Created update_user function in users_router.py file
 this function check if there is a value in the email and role fields, then check to for the username within our database, will check there are values entered by the user in both email and role otherwise the fields will not be updated, also checks if both fields are empty
 
 If email or role values are added or both, this will give a 204 status_code and will commit these changes in our database
 <hr>
 
-## Added put user test in users_test.py
+## 22. Added put user test in users_test.py
 testing different areas for put request such as updating both fields or email and role and testing if put request works if we only have 1 field being changed
 
 added more put test by testing the bad scenarios if they body is empty, username not found, and if there is no body in the request
 <hr>
 
-## Added delete user function in users_repository.py and users_router.py 
+## 23. Added delete user function in users_repository.py and users_router.py 
 our functino in users_router.py will also include an if statement to check for the user in our database. If user is not found then we will raise a HTTPException of 404
 
 Also added response headers in all of our user functions in users_router.py
+<hr>
+
+## 24. Added additional function to check if username already exists in our post request function
+is the post request function in users_router.py, we added an additonal check to take the username_request variable from the user and checked to see if it exists in our database already. If so, this will raise an HTTPException of 409 - conflict
 <hr>
