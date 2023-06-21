@@ -84,6 +84,7 @@ def test_tc0001_get_all_users(client):
     td_username = "darth.vader"
     td_email = "darth.vader@gmail.com"
     td_expected_record_count = 3
+    td_headers = 'displaying all users'
 
     response = client.get('/users/v1')
 
@@ -93,6 +94,7 @@ def test_tc0001_get_all_users(client):
     assert response.json()[td_first_record]['username'] == td_username
     assert response.json()[td_first_record]['email'] == td_email
     assert response.json()[td_first_record]['role'] == td_role
+    assert response.headers['message'] == td_headers
     assert len(response.json()) == td_expected_record_count
 
 
@@ -101,6 +103,7 @@ def test_tc0002_get_by_username(client):
     td_id = 1
     td_username = "darth.vader"
     td_email = "darth.vader@gmail.com"
+    td_headers = 'user found'
 
     response = client.get(f'/users/v1/{td_username}')
 
@@ -110,9 +113,10 @@ def test_tc0002_get_by_username(client):
     assert response.json()['username'] == td_username
     assert response.json()['email'] == td_email
     assert response.json()['role'] == td_role
+    assert response.headers['message'] == td_headers
 
 
-def test_tc0003_get_by_username(client):
+def test_tc0003_bad_get_by_username(client):
     td_username = "this.is.bad"
     td_message = "username not found. Please check your parameter and try again"
 
@@ -208,11 +212,13 @@ def test_tc0008_put(client):
     td_email =  'test@gmail.com'
     td_role = 'test_role'
     td_payload = '{"email": "test@gmail.com", "role": "test_role"}'
+    td_headers = 'user information updated successfully'
 
 
     response = client.put('/users/v1/' + td_username, data= td_payload, content= 'application/json')
 
     assert response.status_code == 204
+    assert response.headers['message'] == td_headers
 
     get_response = client.get(f'/users/v1/{td_username}')
 
@@ -228,11 +234,13 @@ def test_tc0009_put_update_email(client):
     td_email =  'robin@gmail.com'
     td_role = 'hero'
     td_payload = '{"email": "robin@gmail.com"}'
+    td_headers = 'user information updated successfully'
 
 
     response = client.put('/users/v1/' + td_username, data= td_payload, content= 'application/json')
 
     assert response.status_code == 204
+    assert response.headers['message'] == td_headers
 
     get_response = client.get(f'/users/v1/{td_username}')
 
@@ -325,3 +333,4 @@ def test_tc0014_post_existing_email(client):
 
     assert response.status_code == 409
     assert response.json()['detail'] == td_message
+
