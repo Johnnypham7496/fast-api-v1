@@ -32,16 +32,21 @@ def get_by_username(response: Response, username: str, db: Session = Depends(get
     return return_value
 
 
-@router.post("/", response_description="Successfully created user", description="Creates a user", response_model= UserModel, status_code= status.HTTP_201_CREATED, responses= {400: {"model": MessageModel}})
+@router.post("/", response_description="Successfully created user", description="Creates a user", response_model= UserModel, status_code= status.HTTP_201_CREATED, responses= {400: {"model": MessageModel}, 409: {"model": MessageModel}})
 def add_user(request: CreateUserModel, response: Response, db: Session = Depends(get_db)):
     username_request = request.username
     email_request = request.email
     role_request = request.role
 
     existing_username = users_repository.get_by_username(db, username_request)
+    existing_email = users_repository.get_by_email(db, email_request)
 
     if existing_username:
         response_text = 'username already exists. Please check your payload and try again'
+        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail= response_text)
+
+    if existing_email:
+        response_text = 'email already exists. Please check your payload and try again'
         raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail= response_text)
 
     if username_request.strip() == "":

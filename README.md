@@ -158,3 +158,7 @@ Also added response headers in all of our user functions in users_router.py
 ## 24. Added additional function to check if username already exists in our post request function
 is the post request function in users_router.py, we added an additonal check to take the username_request variable from the user and checked to see if it exists in our database already. If so, this will raise an HTTPException of 409 - conflict
 <hr>
+
+## 25. Added get_by_email function in users_repository.py and added checking for existing email field in the post request function in users_router.py file
+like earlier we were checking if the username already exists in the database, we are checking if the email already exists as well and if it does, we raise a 409 Conflict
+<hr>
