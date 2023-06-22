@@ -137,14 +137,35 @@ this code will udpate the fields if values are given by the user. We do not want
 <hr>
 
 
-## Created update_user function in users_router.py file
+## 21. Created update_user function in users_router.py file
 this function check if there is a value in the email and role fields, then check to for the username within our database, will check there are values entered by the user in both email and role otherwise the fields will not be updated, also checks if both fields are empty
 
 If email or role values are added or both, this will give a 204 status_code and will commit these changes in our database
 <hr>
 
-## Added put user test in users_test.py
+## 22. Added put user test in users_test.py
 testing different areas for put request such as updating both fields or email and role and testing if put request works if we only have 1 field being changed
 
 added more put test by testing the bad scenarios if they body is empty, username not found, and if there is no body in the request
+<hr>
+
+## 23. Added delete user function in users_repository.py and users_router.py 
+our functino in users_router.py will also include an if statement to check for the user in our database. If user is not found then we will raise a HTTPException of 404
+
+Also added response headers in all of our user functions in users_router.py
+<hr>
+
+## 24. Added additional function to check if username already exists in our post request function
+is the post request function in users_router.py, we added an additonal check to take the username_request variable from the user and checked to see if it exists in our database already. If so, this will raise an HTTPException of 409 - conflict
+<hr>
+
+## 25. Added get_by_email function in users_repository.py and added checking for existing email field in the post request function in users_router.py file
+like earlier we were checking if the username already exists in the database, we are checking if the email already exists as well and if it does, we raise a 409 Conflict
+<hr>
+
+
+## Added 2 delete test function to users_test.py
+the first function will create a test user then delete them and will also 'get' user as well to check if user is truly deleted
+
+the second delete function will check if the user does not exist when trying to delete by username
 <hr>

@@ -12,9 +12,10 @@ router = APIRouter(
 
 
 @router.get("/", response_description="Display all users", description="Retrieves all users", response_model=List[UserModel])
-def get_users(resposne: Response, db: Session = Depends(get_db)):
+def get_users(response: Response, db: Session = Depends(get_db)):
     return_value = users_repository.get_all_users(db)
-    resposne.status_code = status.HTTP_200_OK
+    response.headers['message'] = 'displaying all users'
+    response.status_code = status.HTTP_200_OK
     return return_value
 
 
@@ -26,15 +27,27 @@ def get_by_username(response: Response, username: str, db: Session = Depends(get
         response_text = "username not found. Please check your parameter and try again"
         raise HTTPException(status_code= status.HTTP_404_NOT_FOUND, detail= response_text)
     
+    response.headers['message'] = 'user found'
     response.status_code = status.HTTP_200_OK
     return return_value
 
 
-@router.post("/", response_description="Successfully created user", description="Creates a user", response_model= UserModel, status_code= status.HTTP_201_CREATED, responses= {400: {"model": MessageModel}})
+@router.post("/", response_description="Successfully created user", description="Creates a user", response_model= UserModel, status_code= status.HTTP_201_CREATED, responses= {400: {"model": MessageModel}, 409: {"model": MessageModel}})
 def add_user(request: CreateUserModel, response: Response, db: Session = Depends(get_db)):
     username_request = request.username
     email_request = request.email
     role_request = request.role
+
+    existing_username = users_repository.get_by_username(db, username_request)
+    existing_email = users_repository.get_by_email(db, email_request)
+
+    if existing_username:
+        response_text = 'username already exists. Please check your payload and try again'
+        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail= response_text)
+
+    if existing_email:
+        response_text = 'email already exists. Please check your payload and try again'
+        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail= response_text)
 
     if username_request.strip() == "":
         response_text = "username field cannot be empty. Please check your payload and try again"
@@ -86,5 +99,19 @@ def update_user(username: str, request: UpdateUserModel, response: Response, db:
         response_text = 'request body fields cannot be empty. Please check your payload and try again'
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=response_text)
     
+    response.headers['message'] = 'user information updated successfully'
     response.status_code= status.HTTP_204_NO_CONTENT
     return users_repository.update_user(db, username, email_request, role_request)
+
+
+@router.delete("/{username}", response_description="Successfully deleted User", description="Deletes user by username", status_code=status.HTTP_204_NO_CONTENT, responses= {204: {"model": None}, 404: {"model": MessageModel}})
+def delete_user(username: str, response: Response, db: Session = Depends(get_db)):
+    return_value = users_repository.get_by_username(db, username)
+
+    if return_value == None:
+        response_text = "username not found. Please check your parameter and try again"
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=response_text)
+
+    response.headers['message'] = "User deleted successfully"
+    response.status_code=status.HTTP_204_NO_CONTENT
+    return users_repository.delete_user(db, username)
