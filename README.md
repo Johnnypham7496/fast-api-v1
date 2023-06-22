@@ -162,3 +162,10 @@ is the post request function in users_router.py, we added an additonal check to 
 ## 25. Added get_by_email function in users_repository.py and added checking for existing email field in the post request function in users_router.py file
 like earlier we were checking if the username already exists in the database, we are checking if the email already exists as well and if it does, we raise a 409 Conflict
 <hr>
+
+
+## Added 2 delete test function to users_test.py
+the first function will create a test user then delete them and will also 'get' user as well to check if user is truly deleted
+
+the second delete function will check if the user does not exist when trying to delete by username
+<hr>
