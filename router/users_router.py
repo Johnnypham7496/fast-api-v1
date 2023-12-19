@@ -21,9 +21,8 @@ def get_users(response: Response, db: Session = Depends(get_db)):
 
 @router.get("/{username}", response_description="Display user by username", description="Retrieves user by username", response_model=UserModel, responses= {404: {"model": MessageModel}})
 def get_by_username(response: Response, username: str, db: Session = Depends(get_db) ):
-    return_value = users_repository.get_by_username(db, username)
 
-    if return_value == None:
+    if (return_value := users_repository.get_by_username(db, username)) == None:
         response_text = "username not found. Please check your parameter and try again"
         raise HTTPException(status_code= status.HTTP_404_NOT_FOUND, detail= response_text)
     
@@ -76,9 +75,8 @@ def update_user(username: str, request: UpdateUserModel, response: Response, db:
         response_text = 'request body cannot be empty. Please check your payload and try again'
         raise HTTPException(status_code= status.HTTP_400_BAD_REQUEST, detail= response_text)
     
-    user_check = users_repository.get_by_username(db, username)
 
-    if user_check == None:
+    if (user_check := users_repository.get_by_username(db, username)) == None:
         response_text = 'username not found. Please use Post to create a user record'
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=response_text)
     
@@ -106,9 +104,8 @@ def update_user(username: str, request: UpdateUserModel, response: Response, db:
 
 @router.delete("/{username}", response_description="Successfully deleted User", description="Deletes user by username", status_code=status.HTTP_204_NO_CONTENT, responses= {204: {"model": None}, 404: {"model": MessageModel}})
 def delete_user(username: str, response: Response, db: Session = Depends(get_db)):
-    return_value = users_repository.get_by_username(db, username)
 
-    if return_value == None:
+    if (return_value := users_repository.get_by_username(db, username)) == None:
         response_text = "username not found. Please check your parameter and try again"
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=response_text)
 
